@@ -27,7 +27,7 @@ func Predict(sentence string, topN int) (map[string]float32, error) {
 	}
 
 	data := C.CString(sentence)
-	ret := C.predict(data, &cprob[0], &buf[0], &resultCnt, 10, 64)
+	ret := C.predict(data, &cprob[0], &buf[0], &resultCnt, C.int(topN), 64)
 
 	if ret != 0 {
 		return result, errors.New("error in prediction")
