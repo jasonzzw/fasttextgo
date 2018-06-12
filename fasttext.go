@@ -25,6 +25,9 @@ func LoadModel(name, path string) {
 func Predict(name, sentence string, topN int) (map[string]float32, error) {
 	result := make(map[string]float32)
 
+	//add new line to sentence, due to the fasttext assumption
+	sentence += "\n"
+
 	cprob := make([]C.float, topN, topN)
 	buf := make([]*C.char, topN, topN)
 	var resultCnt C.int
